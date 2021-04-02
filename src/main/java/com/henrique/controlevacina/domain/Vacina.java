@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Vacina implements Serializable {
 
@@ -20,9 +22,9 @@ public class Vacina implements Serializable {
 
 	private String nome;
 
-	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "vacina")
-	private List<UsuarioVacina> usuarioVacinas;	
+	private List<UsuarioVacina> usuarioVacinas;
 
 	public Vacina() {
 		super();
@@ -61,7 +63,5 @@ public class Vacina implements Serializable {
 	public void setUsuarioVacinas(List<UsuarioVacina> usuarioVacinas) {
 		this.usuarioVacinas = usuarioVacinas;
 	}
-
-
 
 }

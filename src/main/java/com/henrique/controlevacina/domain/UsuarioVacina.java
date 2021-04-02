@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 public class UsuarioVacina {
@@ -18,17 +18,17 @@ public class UsuarioVacina {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@JsonManagedReference
+
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "vacina_id")
 	private Vacina vacina;
-	
+
 	private LocalDate dataAplicacao;
 
 	public UsuarioVacina() {
@@ -67,7 +67,5 @@ public class UsuarioVacina {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
-	
+
 }
