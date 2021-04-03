@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Usuario implements Serializable {
@@ -32,11 +32,11 @@ public class Usuario implements Serializable {
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate data_nacimento;
-
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy = "usuario")
-	private List<UsuarioVacina> usuarioVacinas;
-
+	@JsonBackReference
+	private List<Vacina> vacina;
+	
 	public Usuario() {
 		super();
 	}
@@ -94,12 +94,13 @@ public class Usuario implements Serializable {
 		return serialVersionUID;
 	}
 
-	public List<UsuarioVacina> getUsuarioVacinas() {
-		return usuarioVacinas;
+	
+	public List<Vacina> getVacina() {
+		return vacina;
 	}
 
-	public void setUsuarioVacinas(List<UsuarioVacina> usuarioVacinas) {
-		this.usuarioVacinas = usuarioVacinas;
+	public void setVacina(List<Vacina> vacina) {
+		this.vacina = vacina;
 	}
 
 	@Override

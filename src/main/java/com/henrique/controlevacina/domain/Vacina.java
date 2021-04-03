@@ -1,15 +1,13 @@
 package com.henrique.controlevacina.domain;
 
 import java.io.Serializable;
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Vacina implements Serializable {
@@ -22,19 +20,25 @@ public class Vacina implements Serializable {
 
 	private String nome;
 
-	@JsonManagedReference
-	@OneToMany(mappedBy = "vacina")
-	private List<UsuarioVacina> usuarioVacinas;
-
+	private LocalDate dataVacina;
+	
+	@ManyToOne
+	private Usuario usuario;
+	
 	public Vacina() {
 		super();
 	}
 
-	public Vacina(Integer id, String nome) {
+
+	public Vacina(Integer id, String nome, LocalDate dataVacina, Usuario usuario) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.dataVacina = dataVacina;
+		this.usuario = usuario;
 	}
+
+
 
 	public String getNome() {
 		return nome;
@@ -56,12 +60,20 @@ public class Vacina implements Serializable {
 		this.id = id;
 	}
 
-	public List<UsuarioVacina> getUsuarioVacinas() {
-		return usuarioVacinas;
+	public LocalDate getDataVacina() {
+		return dataVacina;
 	}
 
-	public void setUsuarioVacinas(List<UsuarioVacina> usuarioVacinas) {
-		this.usuarioVacinas = usuarioVacinas;
+	public void setDataVacina(LocalDate dataVacina) {
+		this.dataVacina = dataVacina;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
