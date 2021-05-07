@@ -10,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -24,10 +27,16 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column()
+	@NotNull(message = "compo nome é obrigatorio.")
 	private String nome;
 	@Column(unique = true)
+	@Email
+	@NotNull(message = "compo email é obrigatorio.")
 	private String email;
-	@Column(unique = true)
+	@Column(unique = true )
+	@CPF
+	@NotNull(message = "compo cpf é obrigatorio.")
 	private String cpf;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
