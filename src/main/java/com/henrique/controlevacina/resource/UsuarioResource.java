@@ -2,6 +2,7 @@ package com.henrique.controlevacina.resource;
 
 import java.net.URI;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class UsuarioResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Usuario> creat(@RequestBody Usuario obj){
+	public ResponseEntity<Usuario> creat(@Valid @RequestBody Usuario obj){
 		obj = service.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);

@@ -2,6 +2,8 @@ package com.henrique.controlevacina.resource;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class VacinaResouce {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Vacina> creat(@RequestParam(value = "usuario",defaultValue = "0")Integer id_user,@RequestBody Vacina obj){
+	public ResponseEntity<Vacina> creat(@Valid @RequestParam(value = "usuario",defaultValue = "0")Integer id_user,@RequestBody Vacina obj){
 		obj = service.create(id_user, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/vacinas/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
